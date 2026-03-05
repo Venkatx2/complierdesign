@@ -1,0 +1,30 @@
+%{
+#include<stdio.h>
+%}
+
+%%
+
+"+"     { printf("Addition Operator\n"); }
+"-"     { printf("Subtraction Operator\n"); }
+"*"     { printf("Multiplication Operator\n"); }
+"/"     { printf("Division Operator\n"); }
+
+[0-9]+  { printf("Number : %s\n", yytext); }
+
+[ \t\n]+   ;
+
+.   { printf("Invalid Symbol : %s\n", yytext); }
+
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter Mathematical Expression:\n");
+    yylex();
+    return 0;
+}

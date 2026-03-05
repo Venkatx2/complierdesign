@@ -1,0 +1,26 @@
+%{
+#include<stdio.h>
+
+int tag_count = 0;
+%}
+
+%%
+"<"[a-zA-Z]+">"      { tag_count++; }
+"</"[a-zA-Z]+">"     { tag_count++; }
+
+.|\n                 ;
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter HTML code:\n");
+    yylex();
+
+    printf("Number of HTML tags = %d\n", tag_count);
+    return 0;
+}

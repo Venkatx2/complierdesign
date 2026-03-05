@@ -1,0 +1,25 @@
+%{
+#include<stdio.h>
+%}
+
+%%
+"//".*                     { printf("Single Line Comment\n"); }
+
+"/*"(.|\n)*?"*/"           { printf("Multi Line Comment\n"); }
+
+\n                         { return 0; }
+
+.                          { printf("Not a Comment\n"); }
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter the statement:\n");
+    yylex();
+    return 0;
+}

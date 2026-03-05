@@ -1,0 +1,31 @@
+%{
+#include<stdio.h>
+
+int pos_count = 0;
+int neg_count = 0;
+%}
+
+%%
+[-][0-9]+      { neg_count++; }     /* Negative numbers */
+[0-9]+         { pos_count++; }     /* Positive numbers */
+
+\n             { return 0; }
+
+.              ;
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter numbers:\n");
+    yylex();
+
+    printf("Positive numbers = %d\n", pos_count);
+    printf("Negative numbers = %d\n", neg_count);
+
+    return 0;
+}
